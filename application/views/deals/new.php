@@ -43,7 +43,7 @@
                                     <div class="col-sm-6">
                                         <p>Выручка:</p>
                                         <div class="input-group">
-                                            <input type="text" class="form-control" data-trigger="change" data-required="true" data-type="number" placeholder="Например: 10000">
+                                            <input type="text" class="form-control" data-trigger="change" data-required="true" placeholder="Например: 10000">
                                             <span class="input-group-addon"><i class="fa fa-rouble"></i></span> 
                                         </div>
                                     </div>
@@ -67,6 +67,10 @@
                                 <p>Теги:</p>
                                 <input type="text" class="form-control" data-trigger="change" data-required="true" placeholder="Например: Сайт, битрикс">
                             </div>
+                            
+                            <input type="hidden" name="deal_fields" />
+                            <?php $this->extraFields->loadFromJson( $this->account->getCloudInfo()->deal_fields );?>
+                            
                             <?=$this->load->view("other/new-field", array("newFieldId" => "newFieldInAddDeal"));?>
                         
                         </div>
@@ -90,15 +94,13 @@
                                 </div>
                             </div>
                             
-                            <?=$this->load->view("other/new-field", array("newFieldId" => "newFieldInAddContact"));?>
+                            <?php //$this->load->view("other/new-field", array("newFieldId" => "newFieldInAddContact"));?>
                             
                         </div>
                         <div class="tab-pane" id="step3">This is step 3</div>
                         <ul class="pager wizard m-b-sm">
-                          <li class="previous first" style="display:none;"><a href="#">First</a></li>
                           <li class="previous"><a href="#">Previous</a></li>
-                          <li class="next last" style="display:none;"><a href="#">Last</a></li>
-                          <li class="next"><a href="#">Next</a></li>
+                          <li class="next" id="nextStep"><a href="#">Next</a></li>
                         </ul>
                       </div>
                     </div>

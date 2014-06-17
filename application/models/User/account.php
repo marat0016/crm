@@ -17,6 +17,7 @@ class Account extends CI_Model{
         {
             $this->isLogin = true;
         }
+        //Если пользователь не залонинен, то перенаправляем его на страницу авторизации
         if(!$this->isLogin() && $this->uri->segment(1) != "user" && $this->uri->segment(2) != "login")
         {
             redirect("user/login");
@@ -56,6 +57,13 @@ class Account extends CI_Model{
         if($query->num_rows() > 0)
             return TRUE;
         return FALSE;
+    }
+    
+    //Получаем информацию об облаке пользователя
+    public function getCloudInfo(){
+        $this->db->where("id", $this->getInfo()->cloud_id);
+        $query = $this->db->get("clouds");
+        return $query->row();
     }
     
     public function saveUserDataToCookies($array = array()){
